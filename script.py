@@ -21,7 +21,8 @@ gauth.SaveCredentialsFile("creds.txt")
 drive = GoogleDrive(gauth)
 new_file_name = "emrbackup_{}".format(TIME)
 shutil.make_archive(new_file_name, 'zip', 'xampp')
-
+xampp_archive = drive.CreateFile(metadata={'title': new_file_name})
+xampp_archive.Upload()
 
 
 
