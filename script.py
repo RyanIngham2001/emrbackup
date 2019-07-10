@@ -26,8 +26,13 @@ drive = GoogleDrive(gauth)
 new_file_name = "emrbackup_{}".format(TIME)
 
 # create a copy of the xampp folder for permission reasons 
-shutil.copytree('xampp', 'xampp_copy')
-shutil.make_archive(new_file_name, 'zip', 'xampp_copy')
+try:
+    shutil.copytree('xampp', 'xampp_copy')
+    shutil.make_archive(new_file_name, 'zip', 'xampp_copy')
+except FileNotFoundError:
+    print("ERROR: Xampp folder is not found. Please make sure this script is executing in the same directory as Xampp.\nPress ENTER to quit.")
+    stop_code = input()
+    quit()
 
 # upload file
 xampp_archive = drive.CreateFile(metadata={'title': new_file_name})
