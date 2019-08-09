@@ -12,7 +12,7 @@ yy = TIME[0:4]
 mm = TIME[5:7]
 dd = TIME[8:10]
 CURRENT_TIME = time.mktime((int(yy), int(mm), int(dd), 0, 0, 0, 0, 0, 0))
-WEEK = 604800
+WEEK = 1209600
 
 
 # authenticate google drive API
@@ -44,7 +44,7 @@ for file in file_list:
     fileday = filename[18:20]
     epoch_time = time.mktime((int(fileyear), int(filemonth), int(fileday), 0, 0, 0, 0, 0, 0))
     
-    # if file is older than a week
+    # if file is older than 2 weeks
     if CURRENT_TIME - epoch_time > WEEK:
         file_to_delete = drive.CreateFile({'id': fileID})
         file_to_delete.Trash()
